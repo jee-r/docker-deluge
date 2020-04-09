@@ -17,8 +17,6 @@ before_install:
 
 script:
   - docker build --pull --no-cache --tag "$APP_NAME" .
-  - docker images 
-  - docker tag "$APP_NAME" $DOCKER_REGISTRY_USERNAME/$DOCKER_APP_NAME:$TRAVIS_BUILD_NUMBER;
 
 after_success:
   - echo "$DOCKERHUB_PASSORWD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_REGISTRY"
