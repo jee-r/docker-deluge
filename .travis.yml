@@ -12,5 +12,5 @@ script:
   - docker build --pull --no-cache --tag latest .
 
 after_success:
-  - echo "$DH_PASSWORD" | docker login --username "$DH_USER" --password-stdin
+  - echo "$DH_PASSWD" | docker login --username "$DH_USER" --password-stdin "$DH_REGISTRY"
   - docker push "$DH_IMAGE"
