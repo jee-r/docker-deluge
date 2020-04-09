@@ -23,6 +23,6 @@ after_success:
   - docker images
   - docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":"$TRAVIS_BUILD_NUMBER"
   - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":"$TRAVIS_BUILD_NUMBER"
-    docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
+  - docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
   - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
-    docker logout
+  - docker logout
