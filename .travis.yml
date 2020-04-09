@@ -2,6 +2,13 @@ sudo: required
 services:
   - docker
 
+# Variables:
+#
+#   APP_NAME: Aplication name
+#   DOCKERHUB_USERNAME: Your dockerhub username
+#   DOCKERHUB_PASSWORD: Your dockerhub password or token
+#   DOCKERHUB_REGISTRY: Your registry adress (docker.io for hub.docker.com)
+
 before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -9,8 +16,15 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 script:
-  - docker build --pull --no-cache --tag latest .
+  - docker build --pull --no-cache --tag "$APP_NAME" .
+  - docker images 
+  - docker tag "$APP_NAME" $DOCKER_REGISTRY_USERNAME/$DOCKER_APP_NAME:$TRAVIS_BUILD_NUMBER;
 
 after_success:
-  - echo "$DH_PASSWD" | docker login --username "$DH_USER" --password-stdin "$DH_REGISTRY"
-  - docker push "$DH_IMAGE"
+  - echo "$DOCKERHUB_PASSORWD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_REGISTRY"
+  - docker images
+  - docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":"$TRAVIS_BUILD_NUMBER"
+  - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":"$TRAVIS_BUILD_NUMBER"
+    docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
+  - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":latest
+    docker logout
