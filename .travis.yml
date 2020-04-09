@@ -19,7 +19,7 @@ script:
   - docker build --pull --no-cache --tag "$APP_NAME" .
 
 after_success:
-  - echo "$DOCKERHUB_PASSORWD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_REGISTRY"
+  - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_REGISTRY"
   - docker images
   - docker tag "$APP_NAME" "$DOCKERHUB_USERNAME"/"$APP_NAME":"$TRAVIS_BUILD_NUMBER"
   - docker push "$DOCKERHUB_USERNAME"/"$APP_NAME":"$TRAVIS_BUILD_NUMBER"
