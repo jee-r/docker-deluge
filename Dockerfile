@@ -1,5 +1,9 @@
 FROM alpine:3.11
-LABEL "Maintainer"="Jee <jee@eer.fr>"
+LABEL name="docker-deluge" \
+      maintainer="Jee jee@eer.fr" \
+      description="Deluge is a lightweight, Free Software, cross-platform BitTorrent client." \
+      url="https://deluge-torrent.org/" \
+      org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
 ENV uid=1026 \
     gid=65536
