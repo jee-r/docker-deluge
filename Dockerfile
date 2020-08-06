@@ -6,9 +6,6 @@ LABEL name="docker-deluge" \
       url="https://deluge-torrent.org/" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
-ENV uid=1026 \
-    gid=65536
-
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
@@ -35,13 +32,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     python3 setup.py install && \
     cd / && \
     rm -rf deluge && \
-    # Change `users` gid to match the passed in $gid
-    [ $(getent group users | cut -d: -f3) == $gid ] || \
-      sed -i "s/users:x:[0-9]\+:/users:x:$gid:/" /etc/group && \
-    adduser -h /config -DG users -u $uid deluge && \
-    echo "deluge:deluge" | chpasswd && \
-    mkdir /data && \
-    chown -R deluge:users /config /data && \
     apk del build-base \
             libffi-dev \
             libjpeg-turbo-dev \
@@ -49,9 +39,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
             python3-dev \
             zlib-dev
 
-COPY entrypoint.sh /usr/local/bin/
+WORKDIR /config
 
-USER deluge
+COPY entrypoint.sh /usr/local/bin/
 
 VOLUME ["/config"]
 
