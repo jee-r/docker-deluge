@@ -32,12 +32,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     python3 setup.py install && \
     cd / && \
     rm -rf deluge && \
-    apk del build-base \
-            libffi-dev \
-            libjpeg-turbo-dev \
-            linux-headers \
-            python3-dev \
-            zlib-dev
+    apk del \
+      build-base \
+      libffi-dev \
+      libjpeg-turbo-dev \
+      linux-headers \
+      python3-dev \
+      zlib-dev
 
 WORKDIR /config
 
