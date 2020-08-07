@@ -6,6 +6,8 @@ LABEL name="docker-deluge" \
       url="https://deluge-torrent.org/" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
+ENV PYTHON_EGG_CACHE=/config/.cache
+
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
@@ -43,7 +45,11 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 WORKDIR /config
 
 COPY entrypoint.sh /usr/local/bin/
+COPY healthcheck.sh /usr/local/bin/
 
 VOLUME ["/config"]
+
+HEALTHCHECK --interval=5m --timeout=3s --start-period=30s \
+  CMD /usr/local/bin/healthcheck 58846 8112
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
