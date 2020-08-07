@@ -6,6 +6,8 @@ LABEL name="docker-deluge" \
       url="https://deluge-torrent.org/" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
+ENV PYTHON_EGG_CACHE=/config/.cache
+
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
