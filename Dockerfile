@@ -27,20 +27,20 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
       bash \
       zlib-dev \
       tzdata && \
+    cd /tmp && \
     git clone git://deluge-torrent.org/deluge.git && \
     cd deluge && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \
-    cd / && \
-    rm -rf deluge && \
     apk del \
       build-base \
       libffi-dev \
       libjpeg-turbo-dev \
       linux-headers \
       python3-dev \
-      zlib-dev
+      zlib-dev && \
+    rm -rf /tmp/*
 
 WORKDIR /config
 
