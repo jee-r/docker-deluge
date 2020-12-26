@@ -1,5 +1,6 @@
 kind: pipeline
 name: default
+type: kubernetes
 
 steps:
 - name: build_master
@@ -10,7 +11,7 @@ steps:
     dockerfile: Dockerfile
     username: j33r
     password:
-      from_secret: DOCKER_HUB_TOKKEN
+      from_secret: DOCKER_HUB_TOKEN
   when:
     branch:
       - master
@@ -26,14 +27,13 @@ steps:
     dockerfile: Dockerfile
     username: j33r
     password:
-      from_secret: DOCKER_HUB_TOKKEN
+      from_secret: DOCKER_HUB_TOKEN
   when:
     branch:
       - dev
     event:
       exclude:
         - pull_request
-
 
 - name: test
   image: plugins/docker:latest
@@ -43,8 +43,42 @@ steps:
     dockerfile: Dockerfile
     username: j33r
     password:
-      from_secret: DOCKER_HUB_TOKKEN
+      from_secret: DOCKER_HUB_TOKEN
     dry_run: true
   when:
     event:
       - pull_request
+
+- name: mirroring_github
+  pull: always
+  image: j33r/git-mirror:latest
+  failure: ignore
+  environment:
+    GIT_MIRROR_USER: jee-r
+    GIT_MIRROR_TOKEN:
+      from_secret: GITHUB_TOKEN
+    GIT_MIRROR_REPO: github.com/jee-r/docker-deluge.git
+  when:
+    branch:
+      - master
+      - dev
+    event:
+      exclude:
+        - pull_request
+
+- name: mirroring_framagit
+  pull: always
+  image: j33r/git-mirror:latest
+  failure: ignore
+  environment:
+    GIT_MIRROR_USER: jee
+    GIT_MIRROR_TOKEN:
+      from_secret: FRAMAGIT_TOKEN
+    GIT_MIRROR_REPO: framagit.org/jee/docker-deluge.git
+  when:
+    branch:
+      - master
+      - dev
+    event:
+      exclude:
+        - pull_request
