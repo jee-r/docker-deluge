@@ -7,8 +7,8 @@ LABEL name="docker-deluge" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
 ENV PYTHON_EGG_CACHE=/config/.cache
-
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' /etc/apk/repositories && \
+    echo "https://mirrors.ircam.fr/pub/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk --no-cache add build-base \
