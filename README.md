@@ -1,5 +1,5 @@
 # docker-deluge
-[![Drone (cloud)](https://img.shields.io/drone/build/jee-r/docker-deluge?style=flat-square)](https://cloud.drone.io/jee-r/docker-deluge)
+[![Drone (self-hosted)](https://img.shields.io/drone/build/docker/deluge?server=https%3A%2F%2Fdrone.c0de.in&style=flat-square)](https://drone.c0de.in/docker/deluge)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/j33r/deluge?style=flat-square)](https://microbadger.com/images/j33r/deluge)
 [![MicroBadger Layers](https://img.shields.io/microbadger/layers/j33r/deluge?style=flat-square)](https://microbadger.com/images/j33r/deluge)
 [![Docker Pulls](https://img.shields.io/docker/pulls/j33r/deluge?style=flat-square)](https://hub.docker.com/r/j33r/deluge)
