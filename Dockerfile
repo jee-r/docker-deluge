@@ -35,7 +35,7 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' 
     pip3--timeout 40 --retries 10  install --no-cache-dir --upgrade  \
         wheel \
         pip && \
-    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt
+    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \
