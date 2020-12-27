@@ -19,6 +19,22 @@ steps:
       exclude:
         - pull_request
 
+- name: build_libtorrent
+  image: plugins/docker:latest
+  settings:
+    repo: j33r/deluge
+    tags: libtorrent
+    dockerfile: Dockerfile
+    username: j33r
+    password:
+      from_secret: DOCKER_HUB_TOKEN
+  when:
+    branch:
+      - libtorrent
+    event:
+      exclude:
+        - pull_request
+
 - name: build_dev
   image: plugins/docker:latest
   settings:
