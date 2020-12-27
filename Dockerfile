@@ -32,7 +32,7 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' 
         py3-pip && \
     git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
-    pip3--timeout 40 --retries 10  install --no-cache-dir --upgrade  \
+    pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
         wheel \
         pip && \
     pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt && \
