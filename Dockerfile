@@ -29,9 +29,8 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' 
         python3-dev && \
     apk --no-cache --upgrade add \
         ca-certificates \
-        py3-pip
-
-RUN git clone git://deluge-torrent.org/deluge.git /tmp/deluge
+        py3-pip && \
+    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
     pip3--timeout 40 --retries 10  install --no-cache-dir --upgrade  \
         wheel \
