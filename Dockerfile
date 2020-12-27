@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM emmercm/libtorrent:1-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
@@ -9,7 +9,7 @@ LABEL name="docker-deluge" \
 ENV PYTHON_EGG_CACHE=/config/.cache
 
 RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' /etc/apk/repositories && \
-    echo "https://mirrors.ircam.fr/pub/alpine/edge/testing" >> /etc/apk/repositories && \
+    echo "nameserver 9.9.9.9" > /etc/resolv.conf && \
     apk update && \
     apk upgrade && \
     apk add --no-cache --virtual=base --upgrade \
@@ -29,12 +29,14 @@ RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' 
         python3-dev && \
     apk --no-cache --upgrade add \
         ca-certificates \
-        py3-libtorrent-rasterbar \
-        py3-pip && \
-    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
+        py3-pip
+
+RUN git clone git://deluge-torrent.org/deluge.git /tmp/deluge
     cd /tmp/deluge && \
-    pip3 install --no-cache-dir --upgrade wheel pip && \
-    pip3 install --no-cache-dir --upgrade --requirement requirements.txt && \
+    pip3--timeout 40 --retries 10  install --no-cache-dir --upgrade  \
+        wheel \
+        pip && \
+    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \

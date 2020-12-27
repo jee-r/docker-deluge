@@ -7,7 +7,10 @@
 
 A docker image for [Deluge](https://deluge-torrent.org/) ![deluge's logo](https://user-images.githubusercontent.com/10530469/79228210-5ae36180-7e61-11ea-8f72-276e6197f011.png)
 
-## docker-compose
+
+##
+
+## Docker Compose
 
 ```
 version: '3.8'
