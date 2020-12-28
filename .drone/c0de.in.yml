@@ -35,6 +35,11 @@ steps:
     event:
       - pull_request
 
+---
+kind: pipeline                                                                                                                                                                                    
+name: mirroring
+type: kubernetes
+
 - name: mirroring_github
   pull: always
   image: j33r/git-mirror:latest
