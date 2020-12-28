@@ -6,12 +6,18 @@
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/deluge-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/deluge)
 
 A docker image for [Deluge](https://deluge-torrent.org/) ![deluge's logo](https://user-images.githubusercontent.com/10530469/79228210-5ae36180-7e61-11ea-8f72-276e6197f011.png)
+# Supported tags
+| Tags | Spec | Size | Layers |
+|-|-|-|-|
+| `latest`  | Linux Alpine 3.12  Deluge 2.0.4dev38, Libtorrent 1.2.11 | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/latest?style=flat-square) |
+| `dev`  | Linux Alpine 3.12  Deluge 2.0.4dev38, Libtorrent 1.2.11 | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/dev?style=flat-square) |
 
 # What is Deluge?
 
 From [deluge.org](https://www.qbittorrent.org/):
 
 >  Deluge is a fully-featured cross-platform ​BitTorrent client. It is ​Free Software, licensed under the ​GNU GPLv3+ and adheres to ​freedesktop standards enabling it to work across many desktop environments.
+
 
 # How to use these images
 
@@ -76,7 +82,6 @@ Here's an example `docker-compose.yml` config:
 
 ```yaml
 version: "3"
-
 services:
   deluge:
     image: deluge:latest
@@ -84,6 +89,7 @@ services:
     restart: unless-stopped
     user: 1000:1000
     environment:
+      - UMASK_SET=022
       - TZ=Europe/Paris
     ports:
       - 8112:8112
@@ -91,4 +97,16 @@ services:
     volumes:
       - ./config:/config
       - ./torrents:/torrents
+      - /etc/localtime:/etc/localtime:ro
 ```
+
+# License
+
+This project is under the [GNU Generic Public License v3](https://github.com/jee-r/docker-deluge/blob/master/LICENSE) to allow free use while ensuring it stays open.
+
+## Credit
+
+This image is largely inspired by [Christian Emmer](https://emmer.dev)'s great work
+    - https://github.com/emmercm/docker-libtorrent
+    - https://github.com/emmercm/docker-qbittorrent
+    - yes the readme is copy/paste sorry about that :p
