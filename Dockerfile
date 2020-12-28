@@ -8,38 +8,37 @@ LABEL name="docker-deluge" \
 
 ENV PYTHON_EGG_CACHE=/config/.cache
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+RUN sed -i 's/http:\/\/dl-cdn.alpinelinux.org/https:\/\/mirrors.ircam.fr\/pub/' /etc/apk/repositories && \
+    echo "https://mirrors.ircam.fr/pub/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
-    apk --no-cache add build-base \
-      ca-certificates \
-      libffi-dev \
-      libjpeg-turbo-dev \
-      linux-headers \
-      p7zip \
-      py3-libtorrent-rasterbar \
-      py3-openssl \
-      py3-pip \
-      python3-dev \
-      unrar \
-      unzip \
-      git \
-      bash \
-      zlib-dev \
-      tzdata && \
-    cd /tmp && \
-    git clone git://deluge-torrent.org/deluge.git && \
-    cd deluge && \
+    apk add --no-cache --virtual=base --upgrade \
+        bash \
+        p7zip \
+        unrar \
+        unzip \
+        git \
+        tzdata && \
+    apk add --no-cache --virtual=build-dependencies --upgrade \
+        build-base \
+        libffi-dev \
+        zlib-dev \
+        openssl-dev \
+        libjpeg-turbo-dev \
+        linux-headers \
+        python3-dev && \
+    apk --no-cache --upgrade add \
+        ca-certificates \
+        py3-libtorrent-rasterbar \
+        py3-pip && \
+    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
+    cd /tmp/deluge && \
+    pip3 install --no-cache-dir --upgrade wheel pip && \
+    pip3 install --no-cache-dir --upgrade --requirement requirements.txt && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \
-    apk del \
-      build-base \
-      libffi-dev \
-      libjpeg-turbo-dev \
-      linux-headers \
-      python3-dev \
-      zlib-dev && \
+    apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
 WORKDIR /config
@@ -50,6 +49,6 @@ COPY healthcheck.sh /usr/local/bin/
 VOLUME ["/config"]
 
 HEALTHCHECK --interval=5m --timeout=3s --start-period=30s \
-  CMD /usr/local/bin/healthcheck.sh 58846 8112
+CMD /usr/local/bin/healthcheck.sh 58846 8112
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
