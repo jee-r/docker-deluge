@@ -7,10 +7,10 @@
 
 A docker image for [Deluge](https://deluge-torrent.org/) ![deluge's logo](https://user-images.githubusercontent.com/10530469/79228210-5ae36180-7e61-11ea-8f72-276e6197f011.png)
 # Supported tags
-| Tags | Spec | Size | Layers |
-|-|-|-|-|
-| `latest`  | Linux Alpine 3.12  Deluge 2.0.4dev38, Libtorrent 1.2.11 | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/latest?style=flat-square) |
-| `dev`  | Linux Alpine 3.12  Deluge 2.0.4dev38, Libtorrent 1.2.11 | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/dev?style=flat-square) |
+| Tags | Alpine | Deluge | LibTorrent | Size | Layers |
+|-|-|-|-|-|-|
+| `latest`  | 3.12 | 2.0.4dev38 (build) | 1.2.11 (build) | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/latest?style=flat-square) |
+| `dev`  | 3.12 | 2.0.4dev38 (build) | 1.2.11 (build) | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/dev?style=flat-square) |
 
 # What is Deluge?
 
