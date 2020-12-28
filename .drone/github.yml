@@ -1,0 +1,24 @@
+kind: pipeline                                                                                                                                                                                    
+name: github
+type: docker
+
+steps:
+- name: tag
+  image: alpine:latest
+  commands:
+    - echo -n $DRONE_BRANCH, $DRONE_COMMIT_SHA > .tags
+
+- name: build
+  image: plugins/docker:latest
+  settings:
+    repo: j33r/deluge
+    dockerfile: Dockerfile
+    username: j33r
+    password:
+      from_secret: DOCKER_HUB_TOKEN
+  when:
+    instance:
+      - cloud.drone.io
+    event:
+      exclude:
+        - pull_request

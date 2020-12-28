@@ -3,34 +3,20 @@ name: default
 type: kubernetes
 
 steps:
-- name: build_master
-  image: plugins/docker:latest
-  settings:
-    repo: j33r/deluge
-    tags: latest
-    dockerfile: Dockerfile
-    username: j33r
-    password:
-      from_secret: DOCKER_HUB_TOKEN
-  when:
-    branch:
-      - master
-    event:
-      exclude:
-        - pull_request
+- name: tag
+  image: alpine:latest
+  commands:
+    - echo -n $DRONE_BRANCH, $DRONE_COMMIT_SHA > .tags
 
-- name: build_dev
+- name: build
   image: plugins/docker:latest
   settings:
     repo: j33r/deluge
-    tags: dev
     dockerfile: Dockerfile
     username: j33r
     password:
       from_secret: DOCKER_HUB_TOKEN
   when:
-    branch:
-      - dev
     event:
       exclude:
         - pull_request
