@@ -22,3 +22,45 @@ steps:
     event:
       exclude:
         - pull_request
+
+---
+
+kind: pipeline                                                                                                                                                                                    
+name: mirroring
+type: docker
+
+steps:
+- name: mirroring_c0de.in
+  pull: always
+  image: j33r/git-mirror:latest
+  failure: ignore
+  environment:
+    GIT_MIRROR_USER: jee
+    GIT_MIRROR_TOKEN:
+      from_secret: C0DEIN_TOKEN
+    GIT_MIRROR_REPO: git.c0de.in/docker/deluge.git
+  when:
+    branch:
+      - master
+      - dev
+    event:
+      exclude:
+        - pull_request
+
+- name: mirroring_framagit
+  pull: always
+  image: j33r/git-mirror:latest
+  failure: ignore
+  environment:
+    GIT_MIRROR_USER: jee
+    GIT_MIRROR_TOKEN:
+      from_secret: FRAMAGIT_TOKEN
+    GIT_MIRROR_REPO: framagit.org/jee/docker-deluge.git
+  when:
+    branch:
+      - master
+      - dev
+    event:
+      exclude:
+        - pull_request
+
