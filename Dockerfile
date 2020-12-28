@@ -6,6 +6,8 @@ LABEL name="docker-deluge" \
       url="https://deluge-torrent.org/" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
+ARG LIBTORRENT_VERSION=v1.2.11
+COPY 5026.patch /
 ENV PYTHON_EGG_CACHE=/config/.cache
 
 RUN apk update && \
@@ -27,43 +29,34 @@ RUN apk update && \
         python3-dev && \
     apk --no-cache --upgrade add \
         ca-certificates \
-        py3-pip
-
-ARG LIBTORRENT_VERSION=v1.2.11
-
-COPY 5026.patch /
-
-RUN apk add --no-cache --virtual=libtorrent-base-dependencies --upgrade \
-    boost-system \
-    libgcc \
-    libstdc++ \
-    openssl \
-    python3 \
-    boost-python3
-
-RUN apk add --no-cache --virtual=libtorrent-build-dependencies --upgrade \
-    autoconf \
-    automake \
-    boost-dev \
-    coreutils \
-    file \
-    g++ \
-    gcc \
-    git \
-    libtool \
-    make \
-    openssl-dev \
-    python3-dev
-
-RUN git clone https://github.com/arvidn/libtorrent.git /tmp/libtorrent && \
+        py3-pip && \
+    apk add --no-cache --virtual=libtorrent-base-dependencies --upgrade \
+        boost-system \
+        libgcc \
+        libstdc++ \
+        openssl \
+        python3 \
+        boost-python3 && \
+    apk add --no-cache --virtual=libtorrent-build-dependencies --upgrade \
+        autoconf \
+        automake \
+        boost-dev \
+        coreutils \
+        file \
+        g++ \
+        gcc \
+        git \
+        libtool \
+        make \
+        openssl-dev \
+        python3-dev && \
+    git clone https://github.com/arvidn/libtorrent.git /tmp/libtorrent && \
     cd /tmp/libtorrent && \
     git checkout ${LIBTORRENT_VERSION} && \
     git clean --force && \
     git submodule update --depth=1 --init --recursive && \
     git apply /5026.patch && rm /5026.patch && \
-    ./autotool.sh
-
-RUN cd /tmp/libtorrent && \
+    ./autotool.sh && \
     ./configure \
         --prefix=/usr \
         --with-libiconv \
@@ -72,9 +65,8 @@ RUN cd /tmp/libtorrent && \
         --with-cxx-standard=14 \
         PYTHON="$(which "python3")" && \
     make "-j$(nproc)" && \
-    make install-strip
-
-RUN git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
+    make install-strip && \
+    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
     pip3 install --no-cache-dir --upgrade \
         wheel \
