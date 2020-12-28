@@ -40,6 +40,7 @@ kind: pipeline
 name: mirroring
 type: kubernetes
 
+steps:
 - name: mirroring_github
   pull: always
   image: j33r/git-mirror:latest
