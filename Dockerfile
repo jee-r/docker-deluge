@@ -7,7 +7,7 @@ LABEL name="docker-deluge" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
 ARG LIBTORRENT_VERSION=v1.2.11
-COPY 5026.patch /
+COPY rootfs /
 ENV PYTHON_EGG_CACHE=/config/.cache
 
 RUN apk update && \
@@ -79,9 +79,6 @@ RUN apk update && \
     rm -rf /tmp/*
 
 WORKDIR /config
-
-COPY entrypoint.sh /usr/local/bin/
-COPY healthcheck.sh /usr/local/bin/
 
 VOLUME ["/config"]
 
