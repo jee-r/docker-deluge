@@ -29,7 +29,7 @@ RUN apk update && \
         ca-certificates \
         py3-pip
 
-ARG LIBTORRENT_VERSION=1.2.11
+ARG LIBTORRENT_VERSION=v1.2.11
 
 COPY 5026.patch /
 
