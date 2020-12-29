@@ -1,5 +1,5 @@
 kind: pipeline                                                                                                                                                                                    
-name: github
+name: docker_build
 type: docker
 
 steps:
@@ -23,6 +23,27 @@ steps:
     event:
       exclude:
         - pull_request
+
+---
+
+kind: pipeline                                                                                                                                                                                    
+name: test
+type: docker
+
+steps:
+- name: test
+  image: plugins/docker:latest
+  settings:
+    repo: j33r/deluge
+    tags: latest
+    dockerfile: Dockerfile
+    username: j33r
+    password:
+      from_secret: DOCKER_HUB_TOKEN
+    dry_run: true
+  when:
+    event:
+      - pull_request
 
 ---
 
