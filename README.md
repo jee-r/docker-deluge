@@ -106,7 +106,8 @@ This project is under the [GNU Generic Public License v3](https://github.com/jee
 
 ## Credit
 
-This image is largely inspired by [Christian Emmer](https://emmer.dev)'s great work
-    - https://github.com/emmercm/docker-libtorrent
-    - https://github.com/emmercm/docker-qbittorrent
-    - yes the readme is copy/paste sorry about that :p
+This image is largely inspired by [Christian Emmer](https://emmer.dev)'s great work :
+
+- https://github.com/emmercm/docker-libtorrent
+- https://github.com/emmercm/docker-qbittorrent
+- yes the readme is copy/paste sorry about that :p
