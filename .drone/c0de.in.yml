@@ -7,6 +7,7 @@ steps:
   image: alpine:latest
   commands:
     - echo -n $DRONE_BRANCH, $DRONE_COMMIT_SHA > .tags
+    - if [ $DRONE_BRANCH == "master" ]; then echo -n ", lastest, stable" >> .tags ;fi
 
 - name: build
   image: plugins/docker:latest
