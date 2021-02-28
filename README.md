@@ -21,8 +21,6 @@ From [deluge.org](https://www.qbittorrent.org/):
 
 # How to use these images
 
-These images are built with `qbittorrent-nox` (no X server), a version of qBittorrent with the GUI disabled that is controlled via its built-in web UI.
-
 The images do not require any external Docker networks, volumes, environment variables, or arguments and can be run with just:
 
 ```bash
