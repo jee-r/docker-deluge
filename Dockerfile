@@ -70,6 +70,7 @@ RUN apk update && \
     cd /tmp/deluge && \
     pip3 install --no-cache-dir --upgrade \
         wheel \
+        setuptools \
         pip && \
     pip3 install --no-cache-dir --upgrade --requirement requirements.txt && \
     python3 setup.py clean -a && \
