@@ -26,6 +26,8 @@ RUN apk update && \
         openssl-dev \
         libjpeg-turbo-dev \
         linux-headers \
+        musl-dev \
+        cargo \
         python3-dev && \
     apk --no-cache --upgrade add \
         ca-certificates \
