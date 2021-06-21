@@ -74,11 +74,11 @@ RUN apk update && \
         wheel \
         setuptools \
         pip && \
-    pip3 install --no-cache-dir --upgrade --requirement requirements.txt && \
+    pip3 install --no-cache-dir --upgrade --requirement  --ignore-installed six requirements.txt && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \
-    apk del --purge build-dependencies libtorrent-build-dependencies && \
+     apk del --purge build-dependencies libtorrent-build-dependencies && \
     rm -rf /tmp/*
 
 WORKDIR /config
