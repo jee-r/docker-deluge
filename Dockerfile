@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.13
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
