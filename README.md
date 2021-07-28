@@ -1,16 +1,17 @@
 # docker-deluge
-[![Drone (cloud)](https://img.shields.io/drone/build/jee-r/docker-deluge?&style=flat-square)](https://cloud.drone.io/jee-r/docker-deluge)
+
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/j33r/deluge?style=flat-square)](https://microbadger.com/images/j33r/deluge)
-[![MicroBadger Layers](https://img.shields.io/microbadger/layers/j33r/deluge?style=flat-square)](https://microbadger.com/images/j33r/deluge)
 [![Docker Pulls](https://img.shields.io/docker/pulls/j33r/deluge?style=flat-square)](https://hub.docker.com/r/j33r/deluge)
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/deluge-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/deluge)
 
 A docker image for [Deluge](https://deluge-torrent.org/) ![deluge's logo](https://user-images.githubusercontent.com/10530469/79228210-5ae36180-7e61-11ea-8f72-276e6197f011.png)
+
 # Supported tags
-| Tags | Alpine | Deluge | LibTorrent | Size | Layers |
-|-|-|-|-|-|-|
-| `latest`  | 3.12 | 2.0.4dev38 (build) | 1.2.11 (build) | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/latest?style=flat-square) |
-| `dev`  | 3.12 | 2.0.4dev38 (build) | 1.2.11 (build) | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) | ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/j33r/deluge/dev?style=flat-square) |
+
+| Tags | Size | Build Status |
+|-|-|-|
+| `latest` | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | [![Drone (cloud) master build](https://img.shields.io/drone/build/jee-r/docker-deluge/master?label=master%20build&style=flat-square)](https://cloud.drone.io/jee-r/docker-deluge) |
+| `dev` | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) | [![Drone (cloud) dev build](https://img.shields.io/drone/build/jee-r/docker-deluge/dev?label=dev%20build&style=flat-square)](https://cloud.drone.io/jee-r/docker-deluge) |
 
 # What is Deluge?
 
