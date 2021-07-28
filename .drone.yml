@@ -86,3 +86,16 @@ steps:
       exclude:
         - pull_request
 
+- name: mirroring_gitlab
+  pull: always
+  image: j33r/git-mirror:latest
+  failure: ignore
+  environment:
+    GIT_MIRROR_USER: jee-r
+    GIT_MIRROR_TOKEN:
+      from_secret: GITLAB_TOKEN
+    GIT_MIRROR_REPO: gitlab.com/jee-r/docker-git-mirror.git
+  when:
+    event:
+      exclude:
+        - pull_request
