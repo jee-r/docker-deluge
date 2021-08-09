@@ -6,7 +6,7 @@ LABEL name="docker-deluge" \
       url="https://deluge-torrent.org/" \
       org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
 
-ARG LIBTORRENT_VERSION=v1.2.11
+ARG LIBTORRENT_VERSION=v1.2.14
 COPY rootfs /
 ENV PYTHON_EGG_CACHE=/config/.cache
 
