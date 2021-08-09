@@ -57,7 +57,6 @@ RUN apk update && \
     git checkout ${LIBTORRENT_VERSION} && \
     git clean --force && \
     git submodule update --depth=1 --init --recursive && \
-    git apply /5026.patch && rm /5026.patch && \
     ./autotool.sh && \
     ./configure \
         --prefix=/usr \
