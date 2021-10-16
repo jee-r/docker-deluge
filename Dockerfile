@@ -30,6 +30,7 @@ RUN apk update && \
         cargo \
         python3-dev && \
     apk --no-cache --upgrade add \
+        curl \
         ca-certificates \
         py3-pip && \
     apk add --no-cache --virtual=libtorrent-base-dependencies --upgrade \
