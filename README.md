@@ -12,7 +12,7 @@ A docker image for the torrent client [Deluge](https://deluge-torrent.org/) ![de
 | Tags | Size | Platforms | Build |
 |-|-|-|-|
 | `latest` | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-deluge/Deploy/master?style=flat-square) |
-| `dev` | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) |  `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square) |
+| `dev` | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) |  `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-deluge/Deploy/dev?style=flat-square) |
 
 # What is Deluge?
 
