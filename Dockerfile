@@ -29,6 +29,8 @@ RUN apk update && \
         openssl-dev \
         libjpeg-turbo-dev \
         linux-headers \
+        musl-dev \
+        cargo \
         python3-dev && \
     python3 -m ensurepip --upgrade && \
     git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
