@@ -5,7 +5,7 @@
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/deluge-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/deluge)
 [![ghcr.io](https://img.shields.io/badge/ghrc%2Eio-jee%2D-r/deluge-%232496ED?logo=github&style=flat-square)](https://ghcr.io/jee-r/deluge)
 
-A docker image for [Deluge](https://deluge-torrent.org/) ![deluge's logo](https://user-images.githubusercontent.com/10530469/79228210-5ae36180-7e61-11ea-8f72-276e6197f011.png)
+A docker image for the torrent client [Deluge](https://deluge-torrent.org/) ![deluge's logo](https://user-images.githubusercontent.com/10530469/79228210-5ae36180-7e61-11ea-8f72-276e6197f011.png) based on @emmercm [libtorrent image](https://github.com/emmercm/docker-libtorrent.git). 
 
 # Supported tags
 
@@ -13,6 +13,7 @@ A docker image for [Deluge](https://deluge-torrent.org/) ![deluge's logo](https:
 |-|-|-|-|
 | `latest` | ![](https://img.shields.io/docker/image-size/j33r/deluge/latest?style=flat-square) | `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-deluge/Deploy/master?style=flat-square) |
 | `dev` | ![](https://img.shields.io/docker/image-size/j33r/deluge/dev?style=flat-square) |  `amd64` | ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-beets/Deploy/master?style=flat-square) |
+
 # What is Deluge?
 
 From [deluge.org](https://www.qbittorrent.org/):
@@ -108,5 +109,3 @@ This project is under the [GNU Generic Public License v3](https://github.com/jee
 This image is largely inspired by [Christian Emmer](https://emmer.dev)'s great work :
 
 - https://github.com/emmercm/docker-libtorrent
-- https://github.com/emmercm/docker-qbittorrent
-- yes the readme is copy/paste sorry about that :p

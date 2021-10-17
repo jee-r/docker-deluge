@@ -1,13 +1,14 @@
-FROM alpine:3.13
+FROM emmercm/libtorrent:1.2.14-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
       description="Deluge is a lightweight, Free Software, cross-platform BitTorrent client." \
       url="https://deluge-torrent.org/" \
-      org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge"
+      org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge" \
+      org.opencontainers.image.source="https://github.com/jee-r/docker-deluge"
 
-ARG LIBTORRENT_VERSION=v1.2.14
 COPY rootfs /
+
 ENV PYTHON_EGG_CACHE=/config/.cache
 
 RUN apk update && \
@@ -18,7 +19,9 @@ RUN apk update && \
         unrar \
         unzip \
         git \
-        tzdata && \
+        tzdata \
+        ca-certificates \
+        curl && \
     apk add --no-cache --virtual=build-dependencies --upgrade \
         build-base \
         libffi-dev \
@@ -26,59 +29,19 @@ RUN apk update && \
         openssl-dev \
         libjpeg-turbo-dev \
         linux-headers \
-        musl-dev \
-        cargo \
         python3-dev && \
-    apk --no-cache --upgrade add \
-        curl \
-        ca-certificates \
-        py3-pip && \
-    apk add --no-cache --virtual=libtorrent-base-dependencies --upgrade \
-        boost-system \
-        libgcc \
-        libstdc++ \
-        openssl \
-        python3 \
-        boost-python3 && \
-    apk add --no-cache --virtual=libtorrent-build-dependencies --upgrade \
-        autoconf \
-        automake \
-        boost-dev \
-        coreutils \
-        file \
-        g++ \
-        gcc \
-        git \
-        libtool \
-        make \
-        openssl-dev \
-        python3-dev && \
-    git clone https://github.com/arvidn/libtorrent.git /tmp/libtorrent && \
-    cd /tmp/libtorrent && \
-    git checkout ${LIBTORRENT_VERSION} && \
-    git clean --force && \
-    git submodule update --depth=1 --init --recursive && \
-    ./autotool.sh && \
-    ./configure \
-        --prefix=/usr \
-        --with-libiconv \
-        --enable-python-binding \
-        --with-boost-python="$(find /usr/lib -maxdepth 1 -name "libboost_python3*.so*" | sort | head -1 | sed 's/.*.\/lib\(.*\)\.so.*/\1/')" \
-        --with-cxx-standard=14 \
-        PYTHON="$(which "python3")" && \
-    make "-j$(nproc)" && \
-    make install-strip && \
+    python3 -m ensurepip --upgrade && \
     git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
-    pip3 install --no-cache-dir --upgrade \
+    pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
         wheel \
-        setuptools \
-        pip && \
-    pip3 install --no-cache-dir --upgrade --ignore-installed six --requirement requirements.txt && \
+        pip \
+        six==1.16.0 && \
+    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \
-    apk del --purge build-dependencies libtorrent-build-dependencies && \
+    apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
 WORKDIR /config
