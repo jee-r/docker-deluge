@@ -44,7 +44,8 @@ RUN apk update && \
     python3 setup.py build && \
     python3 setup.py install && \
     apk del --purge build-dependencies && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    ln -sf /config /.config
 
 WORKDIR /config
 
