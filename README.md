@@ -30,12 +30,14 @@ docker run \
     --detach \
     --interactive \
     --name deluge \
-    --user $(id -u):$(id -g)
-    --volume /etc/localtime:/etc/localtime:ro
+    --user $(id -u):$(id -g) \
+    --volume /etc/localtime:/etc/localtime:ro \
     --env UMASK_SET=022 \
+    --env TZ=Europe/Paris \
+    #--env LOGLEVEL=info \
     --publish 8112:8112 \
     --publish 58846:58846 \
-    j33r/deluge:latest
+    ghcr.io/jee-r/deluge:latest
 ```    
 
 And accessed through the web UI at [http://localhost:8112](http://localhost:8112) with the [default](https://dev.deluge-torrent.org/wiki/UserGuide/Authentication) username `localclient` and password `deluge`.
@@ -58,14 +60,16 @@ docker run \
     --detach \
     --interactive \
     --name deluge \
-    --user $(id -u):$(id -g)
+    --user $(id -u):$(id -g) \
     --volume ${HOME}/deluge/torrents:/torrents \
-    --volume ${HOME}/deluge/config:/config
-    --volume /etc/localtime:/etc/localtime:ro
+    --volume ${HOME}/deluge/config:/config \
+    --volume /etc/localtime:/etc/localtime:ro \
     --env UMASK_SET=022 \
+    --env TZ=Europe/Paris \
+    #--env LOGLEVEL=info \
     --publish 8112:8112 \
     --publish 58846:58846 \
-    j33r/deluge:latest
+    ghcr.io/jee-r/deluge:latest
 ```
 
 You should create directory before run the container otherwise directories are created by the docker deamon and owned by the root user
@@ -85,13 +89,14 @@ Here's an example `docker-compose.yml` config:
 version: "3"
 services:
   deluge:
-    image: deluge:latest
+    image: ghcr.io/jee-r/deluge:latest
     container_name: deluge
     restart: unless-stopped
     user: 1000:1000
     environment:
       - UMASK_SET=022
       - TZ=Europe/Paris
+      #- LOGLEVEL=info
     ports:
       - 8112:8112
       - 58846:58846
