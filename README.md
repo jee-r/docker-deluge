@@ -72,7 +72,8 @@ You should create directory before run the container otherwise directories are c
 
 ## Environment variables
 
-To change the timezone of the container set the `TZ` environment variable. The full list of available options can be found on [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+- `LOGLEVEL`: Set the log level: none, info, warning, error, debug (default: info)
+- `TZ`: To change the timezone of the container. The full list of available options can be found on [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 ## Docker Compose
 
