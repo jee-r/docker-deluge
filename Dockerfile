@@ -9,7 +9,8 @@ LABEL name="docker-deluge" \
 
 COPY rootfs /
 
-ENV PYTHON_EGG_CACHE=/config/.cache
+ENV PYTHON_EGG_CACHE=/config/.cache \
+    LOGLEVEL=info
 
 RUN apk update && \
     apk upgrade && \
