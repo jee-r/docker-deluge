@@ -106,6 +106,31 @@ services:
       - /etc/localtime:/etc/localtime:ro
 ```
 
+# Contributing :
+
+You are welcome to contribute to this project, but read this before please.
+
+## Issues
+Found any issue or bug in the codebase? Have a great idea you want to propose ? 
+You can help by submitting an issue to the Github repository. 
+
+**Before opening a new issue, please check if the issue has not been already made by searching 
+the issues**
+
+## Questions
+We would like to have discussions and general queries related to this repository.
+you can reach me on [Libera irc server](https://libera.chat/) `/query jee`
+
+## Pull requests
+Before submitting a pull request, ensure that you go through the following:
+- Ensure that there is no open or closed Pull Request corresponding to your submission to avoid duplication of effort.
+- Create a new branch on your forked repo based on the **dev branch** and make the changes in it. Example:
+```
+    git clone https://your_fork
+    git checkout -B patch-N dev
+```
+- Submit the pull request, provide informations (why/where/how) in the comments section
+
 # License
 
 This project is under the [GNU Generic Public License v3](https://github.com/jee-r/docker-deluge/blob/master/LICENSE) to allow free use while ensuring it stays open.
