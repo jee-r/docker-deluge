@@ -1,4 +1,4 @@
-FROM emmercm/libtorrent:2.0.4-alpine
+FROM emmercm/libtorrent:2.0.5-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
