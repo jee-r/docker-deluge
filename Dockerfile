@@ -21,7 +21,7 @@ RUN apk update && \
     make 
 
 
-FROM emmercm/libtorrent:2.0.6-alpine
+FROM emmercm/libtorrent:2.0.7-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
