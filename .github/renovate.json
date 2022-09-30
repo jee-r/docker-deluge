@@ -3,5 +3,5 @@
     "config:base"
   ],
   "assigneesFromCodeOwners": true,
-  "baseBranches": ["dev"]
+  "baseBranches": ["main"]
 }
