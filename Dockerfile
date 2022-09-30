@@ -1,4 +1,4 @@
-FROM alpine:3.15 AS builder-unrar
+FROM alpine:3.16 AS builder-unrar
 WORKDIR /tmp
 
 ARG UNRAR_VERSION=6.1.5
@@ -21,7 +21,7 @@ RUN apk update && \
     make 
 
 
-FROM emmercm/libtorrent:2.0.6-alpine
+FROM emmercm/libtorrent:2.0.7-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
