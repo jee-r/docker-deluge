@@ -34,6 +34,7 @@ COPY rootfs /
 COPY --from=builder-unrar /tmp/unrar/unrar /tmp/unrar
 
 ENV PYTHON_EGG_CACHE=/config/.cache \
+    XDG_CONFIG_HOME=/config \
     LOGLEVEL=info
 
 RUN apk update && \
