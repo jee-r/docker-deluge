@@ -121,7 +121,7 @@ you can reach me on [Libera irc server](https://libera.chat/) `/query jee`
 
 Before submitting a pull request, ensure that you go through the following:
 - Ensure that there is no open or closed Pull Request corresponding to your submission to avoid duplication of effort.
-- Create a new branch on your forked repo based on the **dev main** and make the changes in it. Example:
+- Create a new branch on your forked repo based on the **main branch** (be sure that your fork is up to date with the upstream) and make the changes in it. Example:
 ```
     git clone https://your_fork
     git checkout -B patch-N main
