@@ -59,11 +59,8 @@ RUN apk update && \
         python3-dev && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
     python3 -m ensurepip --upgrade && \
-		# QuickFIx https://github.com/deluge-torrent/deluge/pull/399 (twisted 22.10 breaking change - web ui base path)
-		wget https://patch-diff.githubusercontent.com/raw/deluge-torrent/deluge/pull/399.patch -O /tmp/deluge.patch && \
     git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
-		git apply /tmp/deluge.patch && \
     pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
         wheel \
         pip \
