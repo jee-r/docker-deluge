@@ -1,7 +1,7 @@
 # docker-deluge
 
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/j33r/deluge?style=flat-square)](https://microbadger.com/images/j33r/deluge)
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/jee-r/docker-deluge/Deploy/master?style=flat-square)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/jee-r/docker-deluge/deploy.yaml?branch=main&style=flat-square)
 [![Docker Pulls](https://img.shields.io/docker/pulls/j33r/deluge?style=flat-square)](https://hub.docker.com/r/j33r/deluge)
 [![DockerHub](https://img.shields.io/badge/Dockerhub-j33r/deluge-%232496ED?logo=docker&style=flat-square)](https://hub.docker.com/r/j33r/deluge)
 [![ghcr.io](https://img.shields.io/badge/ghrc%2Eio-jee%2D-r/deluge-%232496ED?logo=github&style=flat-square)](https://ghcr.io/jee-r/deluge)
