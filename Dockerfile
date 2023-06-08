@@ -20,10 +20,7 @@ RUN apk update && \
     cd /tmp/unrar && \
     make 
 
-
-#FROM emmercm/libtorrent:2.0.8-alpine
 FROM alpine:3.18
-
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
       description="Deluge is a lightweight, Free Software, cross-platform BitTorrent client." \
@@ -49,29 +46,7 @@ RUN apk update && \
         ca-certificates \
         curl \
 	deluge && \
-    apk add --no-cache --virtual=build-dependencies --upgrade \
-        build-base \
-        libffi-dev \
-        zlib-dev \
-        openssl-dev \
-        libjpeg-turbo-dev \
-        linux-headers \
-        musl-dev \
-        cargo \
-        python3-dev && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
-#    python3 -m ensurepip --upgrade && \
-#    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
-#    cd /tmp/deluge && \
-#    pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
-#        wheel \
-#        pip \
-#        six==1.16.0 && \
-#    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt && \
-#    python3 setup.py clean -a && \
-#    python3 setup.py build && \
-#    python3 setup.py install && \
-    apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
 WORKDIR /config
