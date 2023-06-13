@@ -96,14 +96,14 @@ RUN apk update && \
         git \
         tzdata \
         ca-certificates \
-        curl && \
+        curl \
+        python3 && \
     apk add --no-cache --virtual=libtorrent-deps --upgrade \
         boost-python3 \
         boost-system \
         libgcc \
         libstdc++ \
-        openssl \
-        python3 && \
+        openssl  && \
     apk add --no-cache --virtual=build-dependencies --upgrade \
         build-base \
         libffi-dev \
@@ -115,6 +115,18 @@ RUN apk update && \
         cargo \
         python3-dev && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
+    python3 -m ensurepip --upgrade && \
+    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
+    cd /tmp/deluge && \
+    pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
+        wheel \
+        pip \
+        six==1.16.0 && \
+    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt && \
+    python3 setup.py clean -a && \
+    python3 setup.py build && \
+    python3 setup.py install && \
+    apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
 WORKDIR /config
