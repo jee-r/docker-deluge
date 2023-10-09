@@ -1,4 +1,4 @@
-FROM alpine:3.17 AS unrar-builder
+FROM alpine:3.18 AS unrar-builder
 WORKDIR /tmp
 
 ARG UNRAR_VERSION=6.1.5
@@ -21,7 +21,7 @@ RUN apk update && \
     make 
 
 
-FROM emmercm/libtorrent:2.0.8-alpine
+FROM emmercm/libtorrent:2.0.9-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
@@ -32,7 +32,6 @@ LABEL name="docker-deluge" \
 
 COPY rootfs /
 COPY --from=unrar-builder /tmp/unrar/unrar /tmp/unrar
-COPY --from=libtorrent-builder /usr /usr
 
 ENV PYTHON_EGG_CACHE=/config/.cache \
     XDG_CONFIG_HOME=/config \
@@ -60,7 +59,7 @@ RUN apk update && \
         python3-dev && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
     python3 -m ensurepip --upgrade && \
-    git clone git://deluge-torrent.org/deluge.git /tmp/deluge && \
+    git clone -b develop git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
     pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
         wheel \
