@@ -7,7 +7,8 @@
       "matchUpdateTypes": ["patch", "minor"],
       "automerge": true,
       "automergeType": "branch"
-    },
+    }
+  ],
   "assigneesFromCodeOwners": true,
   "baseBranches": ["main"]
 }
