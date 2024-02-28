@@ -25,7 +25,7 @@ docker run \
     --interactive \
     --name deluge \
     --user $(id -u):$(id -g) \
-    --volume /etc/localtime:/etc/localtime:ro \
+    --volume /etc/localtime:/etc/localtime:ro # optional to sync time with the host
     --env UMASK_SET=022 \
     --env TZ=Europe/Paris \
     #--env LOGLEVEL=info \
