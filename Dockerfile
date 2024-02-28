@@ -1,4 +1,4 @@
-FROM alpine:3.17 AS unrar-builder
+FROM alpine:3.19 AS unrar-builder
 WORKDIR /tmp
 
 ARG UNRAR_VERSION=6.1.5
@@ -21,7 +21,7 @@ RUN apk update && \
     make 
 
 
-FROM alpine:3.17 AS libtorrent-builder
+FROM alpine:3.19 AS libtorrent-builder
 
 ARG VERSION=2.0.[0-9]\\+
 
@@ -70,7 +70,7 @@ RUN apk --update add --no-cache --upgrade                               boost-py
     apk del --purge build-dependencies && \
     rm -rf /tmp/*
 
-FROM alpine:3.17
+FROM alpine:3.19
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
