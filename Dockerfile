@@ -1,4 +1,4 @@
-FROM alpine:3.18 AS unrar-builder
+FROM alpine:3.19 AS unrar-builder
 WORKDIR /tmp
 
 ARG UNRAR_VERSION=6.1.5
@@ -21,7 +21,7 @@ RUN apk update && \
     make 
 
 
-FROM emmercm/libtorrent:2.0.9-alpine
+FROM emmercm/libtorrent:2.0.10-alpine
 
 LABEL name="docker-deluge" \
       maintainer="Jee jee@eer.fr" \
@@ -46,7 +46,8 @@ RUN apk update && \
         git \
         tzdata \
         ca-certificates \
-        curl && \
+        curl \
+        python3 && \
     apk add --no-cache --virtual=build-dependencies --upgrade \
         build-base \
         libffi-dev \
@@ -57,15 +58,25 @@ RUN apk update && \
         musl-dev \
         cargo \
         python3-dev && \
+    apk add --no-cache --virtual=deluge-dependencies --upgrade \
+        py3-chardet \
+	    py3-distro \
+	    py3-idna \
+	    py3-mako \
+	    py3-openssl \
+	    py3-pillow \
+	    py3-rencode \
+        py3-service_identity \
+	    py3-setproctitle \
+	    py3-setuptools \
+	    py3-twisted \
+	    py3-wheel \	
+        py3-xdg \
+        py3-six \
+	    py3-zope-interface && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
-    python3 -m ensurepip --upgrade && \
     git clone -b develop git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
-    pip3 --timeout 40 --retries 10  install --no-cache-dir --upgrade  \
-        wheel \
-        pip \
-        six==1.16.0 && \
-    pip3 --timeout 40 --retries 10 install --no-cache-dir --upgrade --requirement requirements.txt && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
     python3 setup.py install && \
