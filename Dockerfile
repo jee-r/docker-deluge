@@ -24,11 +24,11 @@ RUN apk update && \
 FROM emmercm/libtorrent:2.0.10-alpine
 
 LABEL name="docker-deluge" \
-      maintainer="Jee jee@eer.fr" \
-      description="Deluge is a lightweight, Free Software, cross-platform BitTorrent client." \
-      url="https://deluge-torrent.org/" \
-      org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge" \
-      org.opencontainers.image.source="https://github.com/jee-r/docker-deluge"
+    maintainer="Jee jee@eer.fr" \
+    description="Deluge is a lightweight, Free Software, cross-platform BitTorrent client." \
+    url="https://deluge-torrent.org/" \
+    org.label-schema.vcs-url="https://github.com/jee-r/docker-deluge" \
+    org.opencontainers.image.source="https://github.com/jee-r/docker-deluge"
 
 COPY rootfs /
 COPY --from=unrar-builder /tmp/unrar/unrar /tmp/unrar
@@ -60,20 +60,20 @@ RUN apk update && \
         python3-dev && \
     apk add --no-cache --virtual=deluge-dependencies --upgrade \
         py3-chardet \
-	    py3-distro \
-	    py3-idna \
-	    py3-mako \
-	    py3-openssl \
-	    py3-pillow \
-	    py3-rencode \
+        py3-distro \
+        py3-idna \
+        py3-mako \
+        py3-openssl \
+        py3-pillow \
+        py3-rencode \
         py3-service_identity \
-	    py3-setproctitle \
-	    py3-setuptools \
-	    py3-twisted \
-	    py3-wheel \	
+        py3-setproctitle \
+        py3-setuptools \
+        py3-twisted \
+        py3-wheel \	
         py3-xdg \
         py3-six \
-	    py3-zope-interface && \
+        py3-zope-interface && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
     git clone -b develop git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
