@@ -1,4 +1,4 @@
-FROM alpine:3.20 AS unrar-builder
+FROM alpine:3.21 AS unrar-builder
 WORKDIR /tmp
 
 ARG UNRAR_VERSION=6.1.5
