@@ -1,7 +1,11 @@
-FROM alpine:3.21 AS unrar-builder
-WORKDIR /tmp
-
 ARG UNRAR_VERSION=6.1.5
+ARG DELUGE_BRANCH=master
+
+FROM alpine:3.21 AS unrar-builder
+
+ARG UNRAR_VERSION
+
+WORKDIR /tmp
 
 RUN apk update && \
     apk add --no-cache \
@@ -33,6 +37,7 @@ LABEL name="docker-deluge" \
 COPY rootfs /
 COPY --from=unrar-builder /tmp/unrar/unrar /tmp/unrar
 
+ARG DELUGE_BRANCH
 ENV PYTHON_EGG_CACHE=/config/.cache \
     XDG_CONFIG_HOME=/config \
     LOGLEVEL=info
@@ -75,7 +80,7 @@ RUN apk update && \
         py3-six \
         py3-zope-interface && \
     install -v -m755 /tmp/unrar /usr/local/bin && \
-    git clone -b develop git://deluge-torrent.org/deluge.git /tmp/deluge && \
+    git clone -b "${DELUGE_BRANCH}" git://deluge-torrent.org/deluge.git /tmp/deluge && \
     cd /tmp/deluge && \
     python3 setup.py clean -a && \
     python3 setup.py build && \
