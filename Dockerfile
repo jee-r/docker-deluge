@@ -1,7 +1,7 @@
 ARG UNRAR_VERSION=6.1.5
 ARG DELUGE_BRANCH=master
 
-FROM alpine:3.21 AS unrar-builder
+FROM alpine:3.22 AS unrar-builder
 
 ARG UNRAR_VERSION
 
